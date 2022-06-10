@@ -1,0 +1,49 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:14.2-alpine
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=AppleMan922
+      - POSTGRES_DB=book_store #创建这个数据库当第一次启动的时候
+    ports:
+      - "5432:5432"
+  order:
+    build:
+      context: ./grpc-order
+      dockerfile: Dockerfile
+    ports:
+      - "9092:9092"
+    environment:
+      - DB_SOURCE=postgresql://root:AppleMan922@postgres:5432/book_store?sslmode=disable
+    depends_on:
+      - postgres
+    entrypoint:
+      [
+        "/app/wait-for.sh",
+        "postgres:5432",
+        "--",
+        "/app/start.sh"
+      ]
+    command: [ "/app/main" ]
+  purchase:
+    build:
+      context: ./grpc-purchase
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - order
+    entrypoint: [ "/app/wait-for.sh", "order:9092", "--", "/app/main" ]
+  book:
+    build:
+      context: ./grpc-java/book-service
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"
+  userinfo:
+    build:
+      context: ./grpc-java/userinfo-service
+      dockerfile: Dockerfile
+    ports:
+      - "9091:9091"

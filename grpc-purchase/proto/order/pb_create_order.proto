@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package com.bookstore.pb_gen.order_gen;
+option go_package = "/order";
+
+import "google/protobuf/timestamp.proto";
+
+message Order {
+    int64 order_id = 1;
+	string user_name = 2;
+	string book_name = 3;
+	int32 amount = 4;
+	string address = 5;
+	double total_price = 6;
+	google.protobuf.Timestamp created_at = 7;
+}
+
+message CreateOrderRequest {
+	string user_name = 1;
+	string book_name = 2;
+	int32 amount = 3;
+	string address = 4;
+	double total_price = 5;
+	int64 user_id = 6;
+	int64 book_id = 7;
+	int32 currStock = 9;
+	double currBalance = 10;
+}
+
+message CreateOrderResponse {
+	Order order = 1;
+}

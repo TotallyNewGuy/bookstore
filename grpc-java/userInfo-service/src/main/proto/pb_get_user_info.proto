@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package com.bookstore.pb_gen.user_info_gen;
+option go_package = "/user_info";
+
+message User {
+  int64 user_id = 1;
+  string name = 2;
+  string address = 3;
+  double balance = 4;
+}
+
+message getUserInfoRequest {
+  int64 user_id = 1;
+}
+
+message getUserInfoResponse {
+  User userinfo = 1;
+}

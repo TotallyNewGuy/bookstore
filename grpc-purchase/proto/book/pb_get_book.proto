@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package com.bookstore.pb_gen.book_gen;
+option go_package = "/book";
+
+message Book {
+  int64 book_id = 1;
+  string book_name = 2;
+  int32 stock = 3;
+  double price = 4;
+}
+
+message getBookRequest {
+  int64 book_id = 1;
+}
+
+message getBookResponse {
+  Book book = 1;
+}

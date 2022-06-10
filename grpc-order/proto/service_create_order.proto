@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.bookstore.pb_gen.order_gen;
+option go_package = "/order";
+
+import "pb_create_order.proto";
+
+service OrderService {
+    rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse) {}
+}

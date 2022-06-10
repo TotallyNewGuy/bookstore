@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.bookstore.pb_gen.user_info_gen;
+option go_package = "/user_info";
+
+import "pb_get_user_info.proto";
+
+service UserInfoService {
+  rpc getUserInfo (getUserInfoRequest) returns (getUserInfoResponse) {};
+}

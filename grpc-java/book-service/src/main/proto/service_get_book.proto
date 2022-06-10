@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.bookstore.pb_gen.book_gen;
+option go_package = "/book";
+
+import "pb_get_book.proto";
+
+service BookService {
+  rpc getBook (getBookRequest) returns (getBookResponse) {};
+}
