@@ -34,21 +34,21 @@ jobs:
           echo 'build book service...'
           pwd
           ls
-          cd ../../grpc-java/book-service
+          cd grpc-java/book-service
           docker build -t book/$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
           echo 'build userinfo service...'
-          cd ../../grpc-java/userinfo-service
+          cd grpc-java/userinfo-service
           docker build -t userinfo/$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
           echo 'build order service...'
-          cd ../../grpc-order
+          cd grpc-order
           docker build -t order/$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
           echo 'build userinfo service...'
-          cd ../../grpc-purchase
+          cd grpc-purchase
           docker build -t purchase/$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
