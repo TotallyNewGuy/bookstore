@@ -37,8 +37,9 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
           echo 'build userinfo service...'
-          pwd
-          ls
+          # 切换目录是跟上面连着的
+          # 上边进了那个文件夹
+          # 后边要退出来
           cd ../userInfo-service
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
