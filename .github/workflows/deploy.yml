@@ -33,23 +33,23 @@ jobs:
         run: |
           echo 'build book service...'
           cd grpc-java/book-service
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker build -t book/$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push book/$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
           echo 'build userinfo service...'
           # 切换目录是跟上面连着的
           # 上边进了那个文件夹
           # 后边要退出来
           cd ../userInfo-service
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker build -t userinfo/$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push userinfo/$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
           echo 'build order service...'
           cd ../../grpc-order
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker build -t order/$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push order/$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
           echo 'build userinfo service...'
           cd ../grpc-purchase
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker build -t purchase/$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push purchase/$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
