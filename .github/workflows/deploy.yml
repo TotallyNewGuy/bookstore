@@ -25,6 +25,18 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Load secrets and save to app.env
+        run: |
+          cd grpc-order
+          aws secretsmanager get-secret-value --secret-id book_store --query SecretString --output text | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]' > app.env
+          cd ../grpc-purchase
+          aws secretsmanager get-secret-value --secret-id book_store --query SecretString --output text | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]' > app.env
+          cd ../grpc-java/userInfo-service/src/main/resources
+          aws secretsmanager get-secret-value --secret-id book_store --query SecretString --output text | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]' > application.properties
+          cd ../../../../book-service/src/main/resources
+          aws secretsmanager get-secret-value --secret-id book_store --query SecretString --output text | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]' > application.properties
+          cd ../../../../../
+
       - name: Build, tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
