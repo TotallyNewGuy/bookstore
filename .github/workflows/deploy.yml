@@ -25,7 +25,7 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Load secrets and save to app.env
+      - name: Load secrets and save into app.env
         run: |
           cd grpc-order
           aws secretsmanager get-secret-value --secret-id book_store --query SecretString --output text | jq -r 'to_entries|map("\(.key)=\(.value)")|.[]' > app.env
