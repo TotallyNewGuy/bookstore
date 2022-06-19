@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookstore-api-deployment
+  labels:
+    app: bookstore-api
+spec:
+  replicas: 1 # 多少pod运行同一个template
+  selector:
+    matchLabels: # 选择多少pod有这个label的会运行这个deployment
+      app: bookstore-api
+  template:
+    metadata:
+      labels:
+        app: bookstore-api
+    spec:
+      containers:
+        - name: bookstore-purchase-api
+          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:purchase-7662eb9b7a29714a5d1db7525907e1041a7cbc89
+          ports:
+            - containerPort: 8080
+
+        # - name: bookstore-order-api
+        #   image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:order-7662eb9b7a29714a5d1db7525907e1041a7cbc89
+        #   ports:
+        #     - containerPort: 9092
+
+        # - name: bookstore-userinfo-api
+        #   image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:userinfo-7662eb9b7a29714a5d1db7525907e1041a7cbc89
+        #   ports:
+        #     - containerPort: 9091
+
+        # - name: bookstore-book-api
+        #   image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:book-7662eb9b7a29714a5d1db7525907e1041a7cbc89
+        #   ports:
+        #     - containerPort: 9090
