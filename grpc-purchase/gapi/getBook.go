@@ -2,6 +2,7 @@ package gapi
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	pb_book "purchase/pb_gen/book_gen"
@@ -19,6 +20,7 @@ func Grpc_getBook(bookid int64) (*pb_book.GetBookResponse, error) {
 	}
 
 	bookServiceConn, err := grpc.Dial(config.BookGrpcAddress, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	fmt.Println("book_grpc_address: ", config.BookGrpcAddress)
 	if err != nil {
 		log.Fatalf("Failed to connect: %v\n", err)
 	}
