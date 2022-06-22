@@ -8,10 +8,10 @@ dropdb:
 	docker exec -it postgres142 dropdb book_store
 
 migratedown:
-	migrate -path db/migration -database "postgresql://root:AppleMan922@bookstore.cdk2hnzfepv3.us-west-1.rds.amazonaws.com:5432/book_store" -verbose down
+	migrate -path db/migration -database "postgresql://root:AppleMan922@bookstore.cbmocjebgv1a.us-west-2.rds.amazonaws.com:5432/book_store" -verbose down
 
 migrateup:
-	migrate -path db/migration -database "postgresql://root:AppleMan922@localhost:5432/book_store?sslmode=disable" -verbose up
+	migrate -path db/migration -database "postgresql://root:AppleMan922@bookstore.cbmocjebgv1a.us-west-2.rds.amazonaws.com:5432/book_store" -verbose up
 
 sqlc: 
 	sqlc generate

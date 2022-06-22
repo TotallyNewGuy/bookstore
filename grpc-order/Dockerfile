@@ -17,9 +17,8 @@ RUN ["chmod", "+x", "/app/start.sh"]
 COPY wait-for.sh .
 RUN ["chmod", "+x", "/app/wait-for.sh"]
 COPY db/migration ./migration
-RUN ["ls"]
 RUN ["echo", "开始运行order里面的dockerfile"]
 
 EXPOSE 9092
-# CMD [ ]
-ENTRYPOINT [ "./start.sh", "./main" ]
+CMD [ "/app/main" ]
+ENTRYPOINT [ "/app/start.sh" ]
