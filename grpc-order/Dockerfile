@@ -22,4 +22,4 @@ RUN ["echo", "开始运行order里面的dockerfile"]
 
 EXPOSE 9092
 # CMD [ ]
-ENTRYPOINT [ "/app/start.sh", "/app/main" ]
+ENTRYPOINT [ "start.sh", "main" ]
