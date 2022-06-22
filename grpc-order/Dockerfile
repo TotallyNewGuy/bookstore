@@ -19,5 +19,5 @@ RUN ["chmod", "+x", "/app/wait-for.sh"]
 COPY db/migration ./migration
 
 EXPOSE 9092
-CMD [ "/app/main" ]
-ENTRYPOINT [ "/app/start.sh" ]
+# CMD [ ]
+ENTRYPOINT [ "/app/start.sh", "/app/main" ]
