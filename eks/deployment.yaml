@@ -16,21 +16,21 @@ spec:
     spec:
       containers:
         - name: bookstore-purchase-api
-          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:purchase-e405ea896c9876f2f162b0a6bc07a5f5bcc5a919
+          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:purchase-6a311d06d623618ed284c0fcdbb1955d23cb9952
           ports:
             - containerPort: 8080
 
-        # - name: bookstore-order-api
-        #   image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:order-e405ea896c9876f2f162b0a6bc07a5f5bcc5a919
-        #   ports:
-        #     - containerPort: 9092
+        - name: bookstore-order-api
+          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:order-6a311d06d623618ed284c0fcdbb1955d23cb9952
+          ports:
+            - containerPort: 9092
 
-        # - name: bookstore-userinfo-api
-        #   image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:userinfo-e405ea896c9876f2f162b0a6bc07a5f5bcc5a919
-        #   ports:
-        #     - containerPort: 9091
+        - name: bookstore-userinfo-api
+          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:userinfo-6a311d06d623618ed284c0fcdbb1955d23cb9952
+          ports:
+            - containerPort: 9091
 
-        # - name: bookstore-book-api
-        #   image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:book-e405ea896c9876f2f162b0a6bc07a5f5bcc5a919
-        #   ports:
-        #     - containerPort: 9090
+        - name: bookstore-book-api
+          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:book-6a311d06d623618ed284c0fcdbb1955d23cb9952
+          ports:
+            - containerPort: 9090
