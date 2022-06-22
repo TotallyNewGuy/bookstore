@@ -11,7 +11,7 @@ migratedown:
 	migrate -path db/migration -database "postgresql://root:AppleMan922@bookstore.cdk2hnzfepv3.us-west-1.rds.amazonaws.com:5432/book_store" -verbose down
 
 migrateup:
-	migrate -path db/migration -database "postgresql://root:AppleMan922@bookstore.cdk2hnzfepv3.us-west-1.rds.amazonaws.com:5432/book_store" -verbose up
+	migrate -path db/migration -database "postgresql://root:AppleMan922@localhost:5432/book_store?sslmode=disable" -verbose up
 
 sqlc: 
 	sqlc generate
