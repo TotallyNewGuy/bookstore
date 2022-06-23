@@ -15,22 +15,22 @@ spec:
         app: bookstore-api
     spec:
       containers:
-        - name: bookstore-purchase-api
-          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:purchase-b4db387aebaacc0588988f86c1f67a1567ded8f6
-          ports:
-            - containerPort: 8080
-
-        - name: bookstore-order-api
-          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:order-b4db387aebaacc0588988f86c1f67a1567ded8f6
-          ports:
-            - containerPort: 9092
-
         - name: bookstore-userinfo-api
-          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:userinfo-6a311d06d623618ed284c0fcdbb1955d23cb9952
+          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr/userinfo:latest
           ports:
             - containerPort: 9091
 
         - name: bookstore-book-api
-          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:book-6a311d06d623618ed284c0fcdbb1955d23cb9952
+          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr/book:latest
           ports:
             - containerPort: 9090
+
+        - name: bookstore-order-api
+          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr/order:latest
+          ports:
+            - containerPort: 9092
+
+        - name: bookstore-purchase-api
+          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr/purchase:latest
+          ports:
+            - containerPort: 8080
