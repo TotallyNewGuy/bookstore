@@ -16,22 +16,22 @@ spec:
     spec:
       containers:
         - name: bookstore-userinfo-api
-          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:userinfo:latest
+          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:userinfo
           ports:
             - containerPort: 9091
 
         - name: bookstore-book-api
-          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr/book:latest
+          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:book
           imagePullPolicy: Always
           ports:
             - containerPort: 9090
 
         - name: bookstore-order-api
-          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr/order:latest
+          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:order
           ports:
             - containerPort: 9092
 
         - name: bookstore-purchase-api
-          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr/purchase:latest
+          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:purchase
           ports:
             - containerPort: 8080

@@ -55,34 +55,34 @@ jobs:
         run: |
           echo 'build book service......'
           cd grpc-java/book-service
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$BOOK -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$BOOK .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$BOOK
 
           echo 'build userinfo service......'
           # 切换目录是跟上面连着的
           # 上边进了那个文件夹
           # 后边要退出来
           cd ../userInfo-service
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$USERINFO -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$USERINFO .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$USERINFO
 
           echo 'build order service......'
           cd ../../grpc-order
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$ORDER -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$ORDER .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$ORDER
 
           echo 'build purchase service......'
           cd ../grpc-purchase
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$PURCHASE -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$PURCHASE .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$PURCHASE
 
       - name: Deploy image to Amazon EKS
         run: aws eks update-kubeconfig --name bookstore --region us-west-2
 
-      # - name: Deploy image to Amazon EKS
-      #   run: |
-      #     cd ..
-      #     kubectl apply -f eks/aws-auth.yaml
-      #     kubectl apply -f eks/deployment.yaml
-      #     kubectl apply -f eks/service.yaml
-      #     kubectl apply -f eks/ingress.yaml
+      - name: Deploy image to Amazon EKS
+        run: |
+          cd ..
+          kubectl apply -f eks/aws-auth.yaml
+          kubectl apply -f eks/deployment.yaml
+          kubectl apply -f eks/service.yaml
+          kubectl apply -f eks/ingress.yaml
