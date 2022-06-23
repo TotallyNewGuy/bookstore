@@ -76,12 +76,12 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$PURCHASE .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$PURCHASE
 
-      - name: Deploy image to Amazon EKS
+      - name: Update kubernetes config in EKS
         run: aws eks update-kubeconfig --name bookstore --region us-west-2
 
       - name: Deploy image to Amazon EKS
         run: |
-          cd ..
+          ls
           kubectl apply -f eks/aws-auth.yaml
           kubectl apply -f eks/deployment.yaml
           kubectl apply -f eks/service.yaml

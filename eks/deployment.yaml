@@ -17,6 +17,7 @@ spec:
       containers:
         - name: bookstore-userinfo-api
           image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:userinfo
+          imagePullPolicy: Always
           ports:
             - containerPort: 9091
 
@@ -28,10 +29,12 @@ spec:
 
         - name: bookstore-order-api
           image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:order
+          imagePullPolicy: Always
           ports:
             - containerPort: 9092
 
         - name: bookstore-purchase-api
           image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:purchase
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
