@@ -56,7 +56,7 @@ jobs:
           echo 'build book service......'
           cd grpc-java/book-service
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$BOOK -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY:$BOOK
+          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
           echo 'build userinfo service......'
           # 切换目录是跟上面连着的
@@ -64,17 +64,17 @@ jobs:
           # 后边要退出来
           cd ../userInfo-service
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$USERINFO -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY:$USERINFO
+          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
           echo 'build order service......'
           cd ../../grpc-order
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$ORDER -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY:$ORDER
+          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
           echo 'build purchase service......'
           cd ../grpc-purchase
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$PURCHASE -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$PURCHASE
+          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
       - name: Deploy image to Amazon EKS
         run: aws eks update-kubeconfig --name bookstore --region us-west-2
