@@ -55,7 +55,7 @@ jobs:
         run: |
           echo 'build book service......'
           cd grpc-java/book-service
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$BOOK-$IMAGE_TAG -t latest .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$BOOK-$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
           docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
           echo 'build userinfo service......'
@@ -63,18 +63,21 @@ jobs:
           # 上边进了那个文件夹
           # 后边要退出来
           cd ../userInfo-service
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$USERINFO-$IMAGE_TAG -t latest .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$USERINFO-$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
           docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
           echo 'build order service......'
           cd ../../grpc-order
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$ORDER-$IMAGE_TAG -t latest .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$ORDER-$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
           docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
-          echo 'build userinfo service......'
+          echo 'build purchase service......'
           cd ../grpc-purchase
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$PURCHASE-$IMAGE_T`AG -t latest .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$PURCHASE-$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
           docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
+
+      - name: Deploy image to Amazon EKS
+        run: aws eks update-kubeconfig --name bookstore --region us-west-2
 
       # - name: Deploy image to Amazon EKS
       #   run: |
