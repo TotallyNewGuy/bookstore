@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: bookstore-userinfo-api
-          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr/userinfo:latest
+          image: 619795905281.dkr.ecr.us-west-2.amazonaws.com/bookstore_ecr:userinfo:latest
           ports:
             - containerPort: 9091
 
