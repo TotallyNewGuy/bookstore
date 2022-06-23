@@ -7,12 +7,18 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  depoly:
     name: Build images
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v3
+
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v2.0
+        with:
+          version: "v1.24.2" # default is latest stable
+        id: install
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -42,26 +48,38 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: bookstore_ecr
           IMAGE_TAG: ${{ github.sha }}
+          BOOK: book
+          ORDER: order
+          PURCHASE: purchase
+          USERINFO: userinfo
         run: |
           echo 'build book service...'
           cd grpc-java/book-service
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:book-$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:book-$IMAGE_TAG
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/$BOOK:$IMAGE_TAG -t latest .
+          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY/$BOOK
 
           echo 'build userinfo service...'
           # 切换目录是跟上面连着的
           # 上边进了那个文件夹
           # 后边要退出来
           cd ../userInfo-service
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:userinfo-$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:userinfo-$IMAGE_TAG
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/$USERINFO:$IMAGE_TAG -t latest .
+          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY/$USERINFO
 
           echo 'build order service...'
           cd ../../grpc-order
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:order-$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:order-$IMAGE_TAG
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/$ORDER:$IMAGE_TAG -t latest .
+          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY/$ORDER
 
           echo 'build userinfo service...'
           cd ../grpc-purchase
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:purchase-$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:purchase-$IMAGE_TAG
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/$PURCHASE:$IMAGE_TAG -t latest .
+          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY/$PURCHASE
+
+      - name: Deploy image to Amazon EKS
+        run: |
+          cd ..
+          kubectl apply -f eks/aws-auth.yaml
+          kubectl apply -f eks/deployment.yaml
+          kubectl apply -f eks/service.yaml
+          kubectl apply -f eks/ingress.yaml
