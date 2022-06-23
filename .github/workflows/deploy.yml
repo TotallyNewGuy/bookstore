@@ -55,26 +55,26 @@ jobs:
         run: |
           echo 'build book service...'
           cd grpc-java/book-service
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/$BOOK:$IMAGE_TAG -t latest .
-          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY/$BOOK
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/:$BOOK/$IMAGE_TAG -t latest .
+          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
           echo 'build userinfo service...'
           # 切换目录是跟上面连着的
           # 上边进了那个文件夹
           # 后边要退出来
           cd ../userInfo-service
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/$USERINFO:$IMAGE_TAG -t latest .
-          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY/$USERINFO
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/:$USERINFO/$IMAGE_TAG -t latest .
+          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
           echo 'build order service...'
           cd ../../grpc-order
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/$ORDER:$IMAGE_TAG -t latest .
-          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY/$ORDER
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/:$ORDER/$IMAGE_TAG -t latest .
+          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
           echo 'build userinfo service...'
           cd ../grpc-purchase
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/$PURCHASE:$IMAGE_TAG -t latest .
-          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY/$PURCHASE
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY/:$PURCHASE/$IMAGE_TAG -t latest .
+          docker push -a $ECR_REGISTRY/$ECR_REPOSITORY
 
       - name: Deploy image to Amazon EKS
         run: |
