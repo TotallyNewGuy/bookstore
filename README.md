@@ -15,4 +15,4 @@ I drawn some diagrams to explain my results.
 
 ## D. Deploy all services in AWS through Docker and EKS
 
-![image](https://github.com/TotallyNewGuy/bookstore/blob/main/picture/AWS.png)
+![image](https://github.com/TotallyNewGuy/bookstore/blob/main/picture/AWS-arch.png)
