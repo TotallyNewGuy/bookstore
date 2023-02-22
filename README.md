@@ -1,8 +1,8 @@
-# Bookstore  
+# Book Store System  
 This is a briefly introduction of this project.  
 I drawn some diagrams to explain my results.  
 
-## A. Four service in two different languages
+## A. Four services in two different languages
 
 ![image](https://github.com/TotallyNewGuy/bookstore/blob/main/picture/service1.png)
 
